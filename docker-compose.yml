@@ -1,0 +1,42 @@
+services:
+  backend:
+    build: .
+    container_name: backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./media/:/backend/media/
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=otmk_db
+      - DB_USER=postgres
+      - DB_PASSWORD=20090912
+    depends_on:
+      - db
+    networks:
+      - backend
+  db:
+      image: postgres:15-alpine  # Use a lightweight PostgreSQL image
+      container_name: db
+      restart: always
+      ports:
+        - "5432:5432"  # Map port 5432 of the host to the container
+      environment:
+        POSTGRES_USER: postgres     # Replace with your username
+        POSTGRES_PASSWORD: 20090912 # Replace with a secure password
+        POSTGRES_DB: otmk_db      # Replace with your database name
+      volumes:
+        - postgres_data:/var/lib/postgresql/data  # Persist data
+      networks:
+        - backend  # Ensure it connects to the right network
+
+volumes:
+  postgres_data:
+    driver: local  # Use local storage for the volume
+
+networks:
+  backend:
+    driver: bridge
