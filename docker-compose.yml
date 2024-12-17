@@ -33,21 +33,6 @@ services:
       networks:
         - backend  # Ensure it connects to the right network
 
-  nginx:
-    image: nginx
-    restart: always
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx
-    env_file: .env
-    ports:
-      - ${NGINX_PORT}:${NGINX_PORT}
-    depends_on:
-      - backend
-    networks:
-      - backend
-
 volumes:
   postgres_data:
     driver: local  # Use local storage for the volume
