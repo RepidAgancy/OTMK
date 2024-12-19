@@ -30,7 +30,7 @@ class ProgrammersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ['id', 'full_name', 'phone_number', 'status', 'problem']
+        fields = ['id', 'full_name', 'phone_number', 'status', 'problem', 'profile_image']
 
     def get_problem(self, obj):
         problem = models.Problem.objects.filter(programmer__id=obj.id).last()

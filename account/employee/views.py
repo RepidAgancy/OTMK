@@ -28,7 +28,7 @@ class MyProblemsApiView(generics.GenericAPIView):
                 description='Sahifa hajmini belginlang',
                 type=openapi.TYPE_NUMBER
             ),
-        ]
+        ]q
     )
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
