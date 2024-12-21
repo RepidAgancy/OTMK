@@ -40,7 +40,7 @@ class GetTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Task
         fields = [
-            'name', 'board', 'start_date', 'end_date', 'programmers', 'comment'
+            'id', 'name', 'board', 'start_date', 'end_date', 'programmers', 'comment'
         ]
 
     def get_programmers(self, obj):
