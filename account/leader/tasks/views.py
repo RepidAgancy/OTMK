@@ -59,5 +59,5 @@ class DeleteTaskApiView(generics.DestroyAPIView):
 
 class DeleteBoardApiView(generics.DestroyAPIView):
     permission_classes = (permissions.IsLeader,)
-    queryset = models.Task
+    queryset = models.Board
     lookup_field = 'id'
