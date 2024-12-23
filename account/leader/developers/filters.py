@@ -18,8 +18,8 @@ class ProgrammerProblemFilterByProblemSolveTimeFilter(filters.FilterSet):
 
     def filter_by_problem_solve_time(self, queryset, name, value):
         if value == 'least to most':
-            return queryset.order_by('problems_programmer__problem_solve_time').distinct()
+            return queryset.order_by('problems_programmer__problem_solve_time').last()
         elif value == 'most to least':
-            return queryset.order_by('-problems_programmer__problem_solve_time').distinct()
-        return queryset.distinct()
+            return queryset.order_by('-problems_programmer__problem_solve_time').last()
+        return queryset
 
