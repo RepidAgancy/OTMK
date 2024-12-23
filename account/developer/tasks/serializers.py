@@ -26,8 +26,11 @@ class TasksSerializer(serializers.ModelSerializer):
 
 
 class BoardSerializer(serializers.ModelSerializer):
-    tasks = TasksSerializer(source='tasks')
+    tasks = serializers.SerializerMethodField(method_name='get_tasks')
 
     class Meta:
         model = models.Board
         fields = ['id', 'name', 'tasks']
+
+    def get_tasks(self, obj):
+        return TasksSerializer(obj.tasks, many=True).data
