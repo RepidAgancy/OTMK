@@ -1,3 +1,4 @@
+from django.db.models import Max, Min
 from django_filters import rest_framework as filters
 
 from account import models
@@ -17,9 +18,13 @@ class ProgrammerProblemFilterByProblemSolveTimeFilter(filters.FilterSet):
         fields = ['filter', 'start_date', 'end_date']
 
     def filter_by_problem_solve_time(self, queryset, name, value):
-        if value == 'least to most':
-            return queryset.order_by('problems_programmer__problem_solve_time').last()
-        elif value == 'most to least':
-            return queryset.order_by('-problems_programmer__problem_solve_time').last()
-        return queryset
+        queryset = queryset.annotate(
+            max_solve_time=Max('problems_programmer__problem_solve_time'),
+            min_solve_time=Min('problems_programmer__problem_solve_time')
+        )
 
+        if value == 'least to most':
+            return queryset.order_by('min_solve_time')
+        elif value == 'most to least':
+            return queryset.order_by('-max_solve_time')
+        return queryset
