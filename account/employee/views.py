@@ -75,6 +75,6 @@ class GetSolvedProblemsApiView(views.APIView):
 
     def get(self, request):
         employee = request.user
-        problems = models.Problem.objects.filter(employee=employee, programmer_is_solve=True)
+        problems = models.Problem.objects.filter(employee=employee, programmer_is_solve=True, is_solved=False)
         serializer = serializers.MyProblemsSerializer(problems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
