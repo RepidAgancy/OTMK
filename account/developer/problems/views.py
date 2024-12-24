@@ -11,7 +11,7 @@ from account.developer.problems import serializers
 
 class ProblemListApiView(generics.ListAPIView):
     serializer_class = serializers.ProblemsSerializer
-    queryset = models.Problem.objects.filter(programmer__isnull=True)
+    queryset = models.Problem.objects.filter(programmer_id__isnull=True)
     permission_classes = (permissions.IsProgrammer, )
 
 
