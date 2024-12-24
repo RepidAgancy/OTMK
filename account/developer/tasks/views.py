@@ -9,6 +9,6 @@ class TasksApiView(views.APIView):
     permission_classes = (permissions.IsProgrammer, )
 
     def get(self, request):
-        boards = models.Board.objects.filter(tasks__programmers=self.request.user)
+        boards = models.Board.objects.filter(tasks__programmers=self.request.user).distinct()
         serializer = serializers.BoardSerializer(boards, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
