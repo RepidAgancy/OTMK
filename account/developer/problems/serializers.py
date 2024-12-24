@@ -17,17 +17,17 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class ProblemsSerializer(serializers.ModelSerializer):
-    programmer = serializers.SerializerMethodField(method_name='get_programmer')
+    employee = serializers.SerializerMethodField(method_name='get_employee')
     date = serializers.SerializerMethodField(method_name='get_date')
     time = serializers.SerializerMethodField(method_name='get_time')
 
     class Meta:
         model = models.Problem
         fields = [
-            'id', 'programmer', 'date', 'time', 'comment', 'image'
+            'id', 'employee', 'date', 'time', 'comment', 'image'
         ]
 
-    def get_programmer(self, obj):
+    def get_employee(self, obj):
         return EmployeeSerializer(obj.employee).data
 
     def get_date(self, obj):
