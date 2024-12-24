@@ -21,7 +21,7 @@ class ProgrammerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ("id", 'full_name', 'phone_number')
+        fields = ("id", 'full_name', 'phone_number', 'profile_image')
 
     def get_full_name(self, obj):
         return obj.full_name
