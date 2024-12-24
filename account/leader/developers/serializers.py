@@ -6,8 +6,8 @@ from account import models
 
 
 class ProgrammerGetDateSerializer(serializers.Serializer):
-    start_date = serializers.DateField(required=False, help_text='year-month-date')
-    end_date = serializers.DateField(required=False, help_text='year-month-date')
+    start_date = serializers.DateField(required=False, help_text='year-month-date', input_formats='%Y-%m-%d')
+    end_date = serializers.DateField(required=False, help_text='year-month-date', input_formats='%Y-%m-%d')
 
     def validate(self, data):
         start_date = data.get('start_date')

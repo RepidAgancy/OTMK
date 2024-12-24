@@ -1,5 +1,3 @@
-from datetime import datetime, timedelta
-
 from rest_framework import views, generics, status
 from rest_framework.response import Response
 

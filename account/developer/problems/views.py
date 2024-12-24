@@ -93,7 +93,7 @@ class UserKeepNotBusyApiView(generics.GenericAPIView):
             return Response({"message": "You are not busy"})
         serializer = serializers.KeepBusySerializer(data=request.data)
         serializer.is_valid()
-        keep_busy = models.KeepBusy.objects.filter(programmer=request.user, start_time__isnull=False, comment__isnull=True).last()
+        keep_busy = models.KeepBusy.objects.filter(programmer__id=request.user.id, start_time__isnull=False, comment__isnull=True).last()
         keep_busy.comment = serializer.validated_data['comment']
         keep_busy.end_time = datetime.now().time()
         keep_busy.save()

@@ -9,7 +9,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = [
-            'id', 'full_name', 'phone_number'
+            'id', 'full_name', 'phone_number', 'profile_image'
         ]
 
     def get_full_name(self, obj):
@@ -40,5 +40,6 @@ class ProblemsSerializer(serializers.ModelSerializer):
 class KeepBusySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.KeepBusy
-        fields = ['comment']
+        fields = ['comment', 'image']
+
 
