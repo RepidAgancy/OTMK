@@ -33,7 +33,8 @@ class BoardSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'tasks']
 
     def get_tasks(self, obj):
-        return TasksSerializer(obj.tasks, many=True).data
+        tasks = models.Task.objects.filter(board=obj, programmers=self.context.get('programmer'))
+        return TasksSerializer(tasks, many=True).data
 
 
 class TaskUpdateSerializer(serializers.ModelSerializer):
