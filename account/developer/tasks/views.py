@@ -20,3 +20,13 @@ class UpdateTaskApiView(generics.UpdateAPIView):
     queryset = models.Task
     parser_classes = [parsers.JSONParser]
     lookup_field = 'id'
+
+
+
+class BoardsApiView(views.APIView):
+    permission_classes = (permissions.IsProgrammer, )
+    def get(self, request):
+        boards = models.Board.objects.all()
+        boards_serializer = serializers.BoardSerializer(boards, many=True)
+        return Response(boards_serializer.data, status=status.HTTP_200_OK)
+
