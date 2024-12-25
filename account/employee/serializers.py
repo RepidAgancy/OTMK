@@ -59,6 +59,7 @@ class SendProblemSerializer(serializers.ModelSerializer):
             employee=user,
         )
         problem.image = validated_data['image'] if validated_data.get('image') else None
+        problem.save()
         return problem
 
      
