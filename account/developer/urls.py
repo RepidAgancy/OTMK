@@ -17,6 +17,7 @@ urlpatterns = [
     path('tasks/', include(
         [
             path('tasks/', task_views.TasksApiView.as_view()),
+            path('tasks/<int:id>/update/', task_views.UpdateTaskApiView.as_view()),
         ]
     )),
     path('profile/', include(

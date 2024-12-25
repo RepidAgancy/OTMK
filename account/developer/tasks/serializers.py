@@ -34,3 +34,11 @@ class BoardSerializer(serializers.ModelSerializer):
 
     def get_tasks(self, obj):
         return TasksSerializer(obj.tasks, many=True).data
+
+
+class TaskUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Task
+        fields = [
+            'board',
+        ]
