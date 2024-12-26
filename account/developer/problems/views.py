@@ -52,7 +52,7 @@ class ProblemIsSolvedApiView(views.APIView):
 
         problem.solve_date = datetime.now().date()
         problem.solve_time = datetime.now().time()
-        problem_solve_time = timezone.make_aware(datetime.now()) - problem.created_at
+        problem_solve_time = timezone.now() - problem.created_at
         problem.problem_solve_time = str(problem_solve_time)
         problem.status = models.DONE
         problem.save()
@@ -95,7 +95,7 @@ class UserKeepNotBusyApiView(generics.GenericAPIView):
         serializer.is_valid()
         keep_busy = models.KeepBusy.objects.filter(programmer__id=request.user.id).last()
         keep_busy.comment = serializer.validated_data['comment']
-        keep_busy.end_time = datetime.now().time()
+        keep_busy.end_time = timezone.now().time()
         keep_busy.save()
         request.user.status = models.NOT_BUSY
         request.user.save()
