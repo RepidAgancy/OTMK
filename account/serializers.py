@@ -43,3 +43,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = ['first_name', 'last_name', 'phone_number', 'profile_image']
+
+
+class ProgrammerSerializer(serializers.ModelSerializer):
+    problem_id = serializers.SerializerMethodField(method_name='get_problem_id')
+
+    class Meta:
+        model = models.User
+        fields = [
+            'id', 'status', 'problem_id'
+        ]
+
+    def get_problem_id(self, obj):
+        problem = models.Problem.objects.filter(programmer=obj).last()
+        return problem.id if problem else None

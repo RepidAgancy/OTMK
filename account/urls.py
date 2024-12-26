@@ -10,4 +10,5 @@ urlpatterns = [
     path('user/profile/', views.UserProfileApiView.as_view(), name='profile'),
     path('user/roles/', views.GetUserRoleApiView.as_view(), name='user-roles'),
     path('user/status/', views.GetUserStatusApiView.as_view(), name='user-status'),
+    path('programmer-status-list', views.ProgrammerStatusApiView.as_view(), name='programmer-status'),
 ]

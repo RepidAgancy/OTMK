@@ -52,3 +52,10 @@ class GetUserStatusApiView(views.APIView):
             'status': models.User.get_user_status_list()
         }
         return Response(data, status=status.HTTP_200_OK)
+
+
+class ProgrammerStatusApiView(views.APIView):
+    def get(self, request):
+        programmers = models.User.objects.filter(role=models.PROGRAMMER)
+        serializer = serializers.ProgrammerSerializer(programmers, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
