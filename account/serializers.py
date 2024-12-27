@@ -55,5 +55,5 @@ class ProgrammerSerializer(serializers.ModelSerializer):
         ]
 
     def get_problem_id(self, obj):
-        problem = models.Problem.objects.filter(programmer=obj).last()
+        problem = models.Problem.objects.filter(programmer=obj, programmer_is_solve=False).last()
         return problem.id if problem else None
